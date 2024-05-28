@@ -46,7 +46,6 @@ def home():
     for record in myresult:
         insertObject.append(dict(zip(columnNames, record)))
     cursor.close()
-    print(columnNames)
 
     
 
@@ -55,15 +54,16 @@ def home():
 #Ruta para guardar usuarios en la bdd
 @app.route('/user', methods=['POST'])
 def addUser():
+    options = get_types()
     id_ = int(request.form['id'])
     nombre = request.form['nombre']
     peso = request.form['peso']
     altura = request.form['altura']
     desc = request.form['descripcion']
-    tipo1 = buscar_tipo(request.form.get('tipo_1'))
-    tipo2 = buscar_tipo(request.form.get('tipo_2'))
+    tipo1 = buscar_tipo(options,request.form.get('tipo_1'))
+    tipo2 = buscar_tipo(options,request.form.get('tipo_2'))
 
-    if nombre and peso and altura:
+    if id_ and nombre and peso and altura and desc and tipo1 and tipo2:
         cursor = db.database.cursor()
         sql = "INSERT INTO pokemon (id,nombre, peso, altura,descripcion,id_tipo1,id_tipo2) VALUES (%s, %s, %s,%s, %s, %s, %s)"
         data = (id_,nombre, peso, altura,desc,tipo1,tipo2)
@@ -78,7 +78,7 @@ def addUser():
 @app.route('/delete/<string:id>')
 def delete(id):
     cursor = db.database.cursor()
-    sql = "DELETE FROM users WHERE id=%s"
+    sql = "DELETE FROM pokemon WHERE id=%s"
     data = (id,)
     cursor.execute(sql, data)
     db.database.commit()
@@ -86,14 +86,18 @@ def delete(id):
 
 @app.route('/edit/<string:id>', methods=['POST'])
 def edit(id):
-    username = request.form['username']
-    name = request.form['name']
-    password = request.form['password']
+    options = get_types()
+    nombre = request.form['nombre']
+    peso = request.form['peso']
+    altura = request.form['altura']
+    desc = request.form['descripcion']
+    tipo1 = buscar_tipo(options,request.form.get('tipo_1'))
+    tipo2 = buscar_tipo(options,request.form.get('tipo_2'))
 
-    if username and name and password:
+    if nombre and peso and altura and desc and tipo1 and tipo2:
         cursor = db.database.cursor()
-        sql = "UPDATE users SET username = %s, name = %s, password = %s WHERE id = %s"
-        data = (username, name, password, id)
+        sql = "UPDATE pokemon SET nombre = %s, peso = %s, altura = %s, descripcion = %s, id_tipo1 = %s , id_tipo2 = %s WHERE id = %s"
+        data = (nombre, peso, altura,desc,tipo1,tipo2, id)
         cursor.execute(sql, data)
         db.database.commit()
     return redirect(url_for('home'))
