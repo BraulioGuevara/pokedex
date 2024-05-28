@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <h1 class="text-center mt-5 mb-5 text-primary">Python-Flask-MySQL</h1>
+    <h1 class="text-center mt-5 mb-5 text-primary">Pokedex</h1>
 
     <div class="container">
         <div class="card shadow">
@@ -19,24 +19,28 @@
                 <form action="/user" method="POST">
                     <div class="row mb-3">
                         <div class="col">
+                            <label>Id</label>
+                            <input type="text" class="form-control mb-3" name="id">
+                        </div>
+                        <div class="col">
                             <label>Nombre</label>
-                            <input type="text" class="form-control mb-3" name="username">
+                            <input type="text" class="form-control mb-3" name="nombre">
                         </div>
                         <div class="col">
                             <label>Peso</label>
-                            <input type="text" class="form-control mb-3" name="name">
+                            <input type="text" class="form-control mb-3" name="peso">
                         </div>
                         <div class="col">
                             <label>Altura</label>
-                            <input type="text" class="form-control mb-3" name="password">
+                            <input type="text" class="form-control mb-3" name="altura">
                         </div>
                         <div class="col">
                             <label>Descripcion</label>
-                            <input type="text" class="form-control mb-3" name="name">
+                            <input type="text" class="form-control mb-3" name="descripcion">
                         </div>
                         <div class="col">
                             <label>Tipo 1</label>
-                            <select name=""> 
+                            <select name="tipo_1"> 
                                 {% for option in options %} 
                                 <option>{{ option }}</option> 
                                 {% endfor %} 
@@ -44,7 +48,7 @@
                         </div>
                         <div class="col">
                             <label>Tipo 2</label>
-                            <select> 
+                            <select name="tipo_2"> 
                                 {% for option in options %} 
                                 <option>{{ option }}</option> 
                                 {% endfor %} 
@@ -63,7 +67,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Id</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Peso</th>
                             <th scope="col">Altura</th>
@@ -83,8 +87,8 @@
                             <td>{{d.peso}}</td>
                             <td>{{d.altura}}</td>
                             <td>{{d.descripcion}}</td>
-                            <td>{{d.nombre_tipo}}</td>
-                            <td>{{d.nombre_tipo}}</td>
+                            <td>{{d.tipo_1}}</td>
+                            <td>{{d.tipo_2}}</td>
                             <td><button class="btn btn-primary btn-sm" id="btn-edit{{d.id}}" data-bs-toggle="modal" data-bs-target="#modal{{d.id}}">Edit</button></td>
                             <td><a href="{{url_for('delete', id=d.id)}}" class="btn btn-danger btn-sm">Delete</a></td>
                         </tr>

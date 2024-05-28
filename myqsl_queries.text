@@ -1,0 +1,38 @@
+create table tipos(
+	id int primary key,
+    nombre_tipo varchar(20)
+);
+
+insert into tipos(id,nombre_tipo)
+values
+(0,'Ninguno'),
+(1,'Acero'),
+(2,'Agua'),
+(3,'Bicho'),
+(4,'Dragon'),
+(5,'Electricopokemonpokemon'),
+(6,'Fantasma'),
+(7,'Fuego'),
+(8,'Hada'),
+(9,'Hielo'),
+(10,'Lucha'),
+(11,'Normal'),
+(12,'Planta'),
+(13,'Psiquico'),
+(14,'Roca'),
+(15,'Siniestro'),
+(16,'Tierra'),
+(17,'Veneno'),
+(18,'Volador');
+
+create table pokemon(
+	id int primary key,
+    nombre varchar(20) not null,
+    peso varchar(30) not null,
+    altura varchar(30) not null,
+    descripcion varchar(150),
+    id_tipo1 int,
+    idpokemonid_tipo2 int,
+    foreign key (id_tipo1) references tipos(id),
+    foreign key (id_tipo2) references tipos(id)
+);
