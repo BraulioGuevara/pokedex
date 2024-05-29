@@ -67,6 +67,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th scope="col"></th>
                             <th scope="col">Id</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Peso</th>
@@ -82,6 +83,7 @@
                 <tbody>
                     {% for d in data %}
                         <tr>
+                            <td><img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/{{d.id}}.png" style="width: 100px; height: 100px;" /></td>
                             <td>{{d.id}}</td>
                             <td>{{d.nombre}}</td>
                             <td>{{d.peso}}</td>

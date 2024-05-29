@@ -44,10 +44,14 @@ def home():
     columnNames = [column[0] for column in cursor.description]
     
     for record in myresult:
-        insertObject.append(dict(zip(columnNames, record)))
-    cursor.close()
+        record_dict = dict(zip(columnNames, record))
+        record_dict['id'] = str(record_dict['id'])
+        print(record_dict['id'])
+        if(len(record_dict['id']) == 1): record_dict['id'] = "00"+record_dict['id']
+        elif(len(record_dict['id']) == 2): record_dict['id'] = "0"+record_dict['id']
+        insertObject.append(record_dict)#insertObject.append(dict(zip(columnNames, record)))
 
-    
+    cursor.close()
 
     return render_template('index.html', data=insertObject, options=options)
 
@@ -55,6 +59,7 @@ def home():
 @app.route('/user', methods=['POST'])
 def addUser():
     options = get_types()
+    print(len(request.form['id']))
     id_ = int(request.form['id'])
     nombre = request.form['nombre']
     peso = request.form['peso']
@@ -63,7 +68,7 @@ def addUser():
     tipo1 = buscar_tipo(options,request.form.get('tipo_1'))
     tipo2 = buscar_tipo(options,request.form.get('tipo_2'))
 
-    if id_ and nombre and peso and altura and desc and tipo1 and tipo2:
+    if id_ and nombre and peso and altura and desc and tipo1:
         cursor = db.database.cursor()
         sql = "INSERT INTO pokemon (id,nombre, peso, altura,descripcion,id_tipo1,id_tipo2) VALUES (%s, %s, %s,%s, %s, %s, %s)"
         data = (id_,nombre, peso, altura,desc,tipo1,tipo2)
