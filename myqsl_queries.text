@@ -10,7 +10,7 @@ values
 (2,'Agua'),
 (3,'Bicho'),
 (4,'Dragon'),
-(5,'Electricopokemonpokemon'),
+(5,'Electrico'),
 (6,'Fantasma'),
 (7,'Fuego'),
 (8,'Hada'),
@@ -32,7 +32,7 @@ create table pokemon(
     altura varchar(30) not null,
     descripcion varchar(150),
     id_tipo1 int,
-    idpokemonid_tipo2 int,
+    id_tipo2 int,
     foreign key (id_tipo1) references tipos(id),
     foreign key (id_tipo2) references tipos(id)
 );
