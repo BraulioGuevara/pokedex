@@ -98,7 +98,7 @@ def edit(id):
     tipo1 = buscar_tipo(options,request.form.get('tipo_1'))
     tipo2 = buscar_tipo(options,request.form.get('tipo_2'))
 
-    if nombre and peso and altura and desc and tipo1 and tipo2:
+    if nombre and peso and altura and desc and tipo1:
         cursor = db.database.cursor()
         sql = "UPDATE pokemon SET nombre = %s, peso = %s, altura = %s, descripcion = %s, id_tipo1 = %s , id_tipo2 = %s WHERE id = %s"
         data = (nombre, peso, altura,desc,tipo1,tipo2, id)
