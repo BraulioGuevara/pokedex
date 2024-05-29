@@ -46,7 +46,7 @@ def home():
     for record in myresult:
         record_dict = dict(zip(columnNames, record))
         record_dict['id'] = str(record_dict['id'])
-        print(record_dict['id'])
+
         if(len(record_dict['id']) == 1): record_dict['id'] = "00"+record_dict['id']
         elif(len(record_dict['id']) == 2): record_dict['id'] = "0"+record_dict['id']
         insertObject.append(record_dict)#insertObject.append(dict(zip(columnNames, record)))
@@ -59,7 +59,6 @@ def home():
 @app.route('/user', methods=['POST'])
 def addUser():
     options = get_types()
-    print(len(request.form['id']))
     id_ = int(request.form['id'])
     nombre = request.form['nombre']
     peso = request.form['peso']
