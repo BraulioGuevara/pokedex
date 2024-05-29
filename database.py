@@ -1,8 +1,8 @@
 import mysql.connector
 
 database = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='123698745',
+    host='pokedex.csibao6zjk83.us-east-1.rds.amazonaws.com',
+    user='admin',
+    password='12345678',
     database='pokedex'
 )
